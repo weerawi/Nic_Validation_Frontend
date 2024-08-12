@@ -27,12 +27,11 @@ const Header = () => {
       zIndex: isFixed ? 100 : 1,
       width: '100%', 
     }}
-
-    className='rounded-bl-full rounded-br-full pt-2'
+ 
   
   >
       
-      <div className="px-5 py-3 w-full lg:w-[80%] max-w-[1300px] mx-auto ">
+      <div className={`${ isFixed ? '   w-full lg:w-[80%] max-w-[1300px] mx-auto' : ' '}`}>
 
    
 
@@ -47,7 +46,7 @@ const Header = () => {
               boxShadow: isFixed? " rgba(255,255,255, 0.55) 0px -4px 10px 0px inset":'',
           
       }}
-       className={` rounded-full ${ isFixed ? 'my-2 py-5 px-5' : 'py-3 '}`} 
+       className={`rounded-full  ${ isFixed ? 'my-2 py-9 px-5 mt-7 ' : ' '}`} 
        >
             <Navbar/>
         </div>

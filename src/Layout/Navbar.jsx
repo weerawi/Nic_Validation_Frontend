@@ -26,7 +26,7 @@ const Navbar = () => {
     const {isFixed, isSignedIn} = useContext(NicContext);
 
     return (
-        <nav className={`flex ${ !isFixed ? 'bg-black p-4 rounded-full top-0' : ' '} items-center justify-between uppercase text-sm md:text-base lg:tracking-widest  text-white`}>
+        <nav className={`flex ${ !isFixed ? 'bg-black  rounded-bl-full rounded-br-full   top-0 py-10 px-24' : '   '} items-center justify-between uppercase text-sm md:text-base lg:tracking-widest  text-white`}>
             {/* Logo */}
             <div className='flex items-center'>
                 <Link to="/home" className="flex items-center">
@@ -51,7 +51,7 @@ const Navbar = () => {
              {/* Logout Button */}
             {isSignedIn && <button
                 onClick={logout}
-                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"
             >
                 Logout
             </button>}

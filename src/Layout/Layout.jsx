@@ -13,15 +13,15 @@ const Layout = (props) => {
 
 
   return (
-    <div>
+    <Fragment>
         <Header />
-        <div className="bg-red-100 ">
-            <main className='px-5 py-3 w-full lg:w-[80%] max-w-[1300px] mx-auto pt-28'>
+        <div className="bg-white ">
+            <main className='px-5 py-3 w-full lg:w-[80%] max-w-[1300px] mx-auto pt-56 '>
             {props.children}
             </main>
         </div>
         <Footer />
-    </div>
+    </Fragment>
   )
 }
 
