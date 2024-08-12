@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Logo from '../Assets/mobios_logo.jpg'; // Ensure this path is correct
 import { NicContext } from '../Context/NicContext';
+import Cookies from 'js-cookie';
 
 const navData = [
     { name: 'home', path: '/home' },
@@ -10,12 +11,19 @@ const navData = [
 ];
 
 const Navbar = () => {
-
+    const logout = () => {
+        // Clear tokens or any authentication-related data
+        localStorage.removeItem('user_id');
+        Cookies.remove('access_token');
+      
+        // Redirect to login page
+        window.location.href = '/';
+      };
 
     const location = useLocation();
     const pathname = location.pathname;
 
-    const {isFixed} = useContext(NicContext);
+    const {isFixed, isSignedIn} = useContext(NicContext);
 
     return (
         <nav className={`flex ${ !isFixed ? 'bg-black p-4 rounded-full top-0' : ' '} items-center justify-between uppercase text-sm md:text-base lg:tracking-widest  text-white`}>
@@ -39,6 +47,14 @@ const Navbar = () => {
                     </Link>
                 ))}
             </div>
+
+             {/* Logout Button */}
+            {isSignedIn && <button
+                onClick={logout}
+                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+            >
+                Logout
+            </button>}
         </nav>
     );
 }
