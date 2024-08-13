@@ -3,6 +3,8 @@ import Logo from '../Assets/mobios_logo.jpg';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { NicContext } from '../Context/NicContext';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({
@@ -37,18 +39,25 @@ const LoginPage = () => {
           {
             username: formData.username,
             email: formData.email,
-            password: formData.password,
-            confirmPassword: formData.confirmPassword,
+            password: formData.password, 
           }
         );
         console.log('Sign-up successful!', response.data);
-  
+        toast.success('Sign-up successful!', {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          theme: "dark",
+        });
         // Save user_id and token
         localStorage.setItem('user_id', response.data.user_id); // Assuming the backend sends user_id
-        Cookies.set('access_token', response.data.token, { expires: 7 }); // Assuming 'token' is the correct field name
+        // Cookies.set('access_token', response.data.token, { expires: 7 }); // Assuming 'token' is the correct field name
   
         // Redirect to dashboard
-        window.location.href = '/';
+        // window.location.href = '/';
       } else {
         // Login logic
         const response = await axios.post(
@@ -76,26 +85,52 @@ const LoginPage = () => {
             // Redirect to dashboard
             window.location.href = '/home';
         } else {
-            throw new Error('Token not received');
+            // throw new Error('Token not received');
+
+            toast.error('Token not received', {
+              position: "top-right",
+              autoClose: 2000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              theme: "dark",
+          });
         }
-
-
 
         // setIsSignedIn(true);
         // // Redirect to dashboard
         // window.location.href = '/home';
 
 
-
-
       }
     } catch (error) {
-      console.error(isSignUp ? 'Sign-up failed:' : 'Login failed:', error.response ? error.response.data : error.message);
-      setError(isSignUp ? 'Sign-up failed. Please try again.' : 'Login failed. Please check your credentials.');
+      let errorMessage = isSignUp ? 'Sign-up failed. Please try again.' : 'Login failed. Please check your credentials.';
+
+        // Extract backend error message if available
+        if (error.response && error.response.data) {
+            errorMessage = error.response.data || errorMessage;
+        }
+
+        console.error(isSignUp ? 'Sign-up failed:' : 'Login failed:', error.response ? error.response.data : error.message);
+
+        toast.error(errorMessage, {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            theme: "dark",
+        });
     } finally {
       setLoading(false);
     }
+
+    
   };
+
+ 
 
   const handleForgotPassword = async (e) => {
     e.preventDefault();
@@ -120,6 +155,23 @@ const LoginPage = () => {
   };
 
   return (
+
+    <>
+
+            <ToastContainer
+                position="top-right"
+                autoClose={2000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+            />
+
+    
     <div className="flex flex-col items-center justify-center mx-auto mt-14 mb-20 py-4 min-h-[500px] max-w-[400px] bg-white rounded-3xl shadow-2xl">
       <img src={Logo} alt="Logo" className="h-28 mb-1" />
       <div className="w-80">
@@ -194,7 +246,7 @@ const LoginPage = () => {
               />
             </div>
 
-            {isSignUp && (
+            {/* {isSignUp && (
               <div className="mb-4">
                 <label className="block mb-1">Confirm Password:</label>
                 <input
@@ -205,7 +257,7 @@ const LoginPage = () => {
                   className="w-full p-2 border border-gray-300 rounded"
                 />
               </div>
-            )}
+            )} */}
 
             <button
               type="submit"
@@ -231,6 +283,7 @@ const LoginPage = () => {
         )}
       </div>
     </div>
+    </>
   );
 };
 
