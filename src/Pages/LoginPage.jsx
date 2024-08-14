@@ -25,94 +25,75 @@ const LoginPage = () => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+ 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
-  
+
     try {
-      if (isSignUp) {
-        // Sign-up logic
-        const response = await axios.post(
-          'http://localhost:8080/signup',
-          {
-            username: formData.username,
-            email: formData.email,
-            password: formData.password, 
-          }
-        );
-        console.log('Sign-up successful!', response.data);
-        toast.success('Sign-up successful!', {
-          position: "top-right",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          theme: "dark",
-        });
-        // Save user_id and token
-        localStorage.setItem('user_id', response.data.user_id); // Assuming the backend sends user_id
-        // Cookies.set('access_token', response.data.token, { expires: 7 }); // Assuming 'token' is the correct field name
-  
-        // Redirect to dashboard
-        // window.location.href = '/';
-      } else {
-        // Login logic
-        const response = await axios.post(
-          'http://localhost:8080/signin',
-          {
-            username: formData.username,
-            password: formData.password,
-          }
-        ); 
-            // Log response details
-        console.log('Login successful!', response);
-        console.log('Response Data:', response.data);
-        console.log('Response Headers:', response.headers);
-  
-        // Retrieve the token from the 'Authorization' header
-        const token = response.headers['authorization']?.split(' ')[1]|| response.data.token;
-        
-        // Store the token in a cookie or localStorage
-        Cookies.set('access_token', token, { expires: 1 });
-  
-        // Check if token is defined
-        if (token) {
-            Cookies.set('access_token', token, { expires: 1 });
-            setIsSignedIn(true);
-            // Redirect to dashboard
-            window.location.href = '/home';
+        if (isSignUp) {
+            // Sign-up logic
+            const response = await axios.post(
+                'http://localhost:8080/signup',
+                {
+                    username: formData.username,
+                    email: formData.email,
+                    password: formData.password,
+                }
+            );
+
+            console.log('Sign-up successful!', response.data);
+            toast.success('Sign-up successful!', {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                theme: "dark",
+            });
+
+            localStorage.setItem('user_id', response.data.user_id);
+            Cookies.set('access_token', response.data.token, { expires: 7 });
+
+             
         } else {
-            // throw new Error('Token not received');
+            // Login logic
+            const response = await axios.post(
+                'http://localhost:8080/signin',
+                {
+                    username: formData.username,
+                    password: formData.password,
+                }
+            );
 
-            toast.error('Token not received', {
-              position: "top-right",
-              autoClose: 2000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              theme: "dark",
-          });
+            console.log('Login successful!', response.data);
+            const { token } = response.data;
+
+            if (token) {
+                Cookies.set('access_token', token, { expires: 1 });
+                setIsSignedIn(true);
+                window.location.href = '/home';
+            } else {
+                toast.error('Token not received', {
+                    position: "top-right",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    theme: "dark",
+                });
+            }
         }
-
-        // setIsSignedIn(true);
-        // // Redirect to dashboard
-        // window.location.href = '/home';
-
-
-      }
     } catch (error) {
-      let errorMessage = isSignUp ? 'Sign-up failed. Please try again.' : 'Login failed. Please check your credentials.';
+        let errorMessage = isSignUp ? 'Sign-up failed. Please try again.' : 'Login failed. Please check your credentials.';
 
-        // Extract backend error message if available
         if (error.response && error.response.data) {
             errorMessage = error.response.data || errorMessage;
         }
-
-        console.error(isSignUp ? 'Sign-up failed:' : 'Login failed:', error.response ? error.response.data : error.message);
 
         toast.error(errorMessage, {
             position: "top-right",
@@ -124,11 +105,108 @@ const LoginPage = () => {
             theme: "dark",
         });
     } finally {
-      setLoading(false);
+        setLoading(false);
     }
+};
 
-    
-  };
+
+
+  
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     setLoading(true);
+//     setError(null);
+
+//     try {
+//         if (isSignUp) {
+//             // Sign-up logic
+//             const response = await axios.post(
+//                 'http://localhost:8080/signup',
+//                 {
+//                     username: formData.username,
+//                     email: formData.email,
+//                     password: formData.password,
+//                 }
+//             );
+
+//             console.log('Sign-up successful!', response.data);
+//             toast.success('Sign-up successful!', {
+//                 position: "top-right",
+//                 autoClose: 2000,
+//                 hideProgressBar: false,
+//                 closeOnClick: true,
+//                 pauseOnHover: true,
+//                 draggable: true,
+//                 theme: "dark",
+//             });
+
+//             // Save user_id and token
+//             localStorage.setItem('user_id', response.data.user_id); // Assuming the backend sends user_id
+//             Cookies.set('access_token', response.data.token, { expires: 7 }); // Assuming 'token' is the correct field name
+
+//             // Redirect to dashboard
+//             // window.location.href = '/';
+//         } else {
+//             // Login logic
+//             const response = await axios.post(
+//                 'http://localhost:8080/signin',
+//                 {
+//                     username: formData.username,
+//                     password: formData.password,
+//                 }
+//             );
+
+//             console.log('Login successful!', response);
+//             console.log('Response Data:', response.data);
+//             console.log('Response Headers:', response.headers);
+
+//             // Retrieve the token from the 'Authorization' header
+//             const token = response.headers['authorization']?.split(' ')[1] || response.data.token;
+
+//             // Store the token in a cookie or localStorage
+//             Cookies.set('access_token', token, { expires: 1 });
+
+//             if (token) {
+//                 Cookies.set('access_token', token, { expires: 1 });
+//                 setIsSignedIn(true);
+//                 // Redirect to dashboard
+//                 window.location.href = '/home';
+//             } else {
+//                 toast.error('Token not received', {
+//                     position: "top-right",
+//                     autoClose: 2000,
+//                     hideProgressBar: false,
+//                     closeOnClick: true,
+//                     pauseOnHover: true,
+//                     draggable: true,
+//                     theme: "dark",
+//                 });
+//             }
+//         }
+//     } catch (error) {
+//         let errorMessage = isSignUp ? 'Sign-up failed. Please try again.' : 'Login failed. Please check your credentials.';
+
+//         // Extract backend error message if available
+//         if (error.response && error.response.data) {
+//             errorMessage = error.response.data || errorMessage;
+//         }
+
+//         console.error(isSignUp ? 'Sign-up failed:' : 'Login failed:', error.response ? error.response.data : error.message);
+
+//         toast.error(errorMessage, {
+//             position: "top-right",
+//             autoClose: 2000,
+//             hideProgressBar: false,
+//             closeOnClick: true,
+//             pauseOnHover: true,
+//             draggable: true,
+//             theme: "dark",
+//         });
+//     } finally {
+//         setLoading(false);
+//     }
+// };
 
  
 
@@ -211,7 +289,9 @@ const LoginPage = () => {
           </form>
         ) : (
           <form onSubmit={handleSubmit}>
-            <div className="mb-4">
+
+
+            {isSignUp &&<div className="mb-4">
               <label className="block mb-1">Username:</label>
               <input
                 type="text"
@@ -220,9 +300,9 @@ const LoginPage = () => {
                 onChange={handleChange}
                 className="w-full p-2 border border-gray-300 rounded"
               />
-            </div>
+            </div>}
 
-            {isSignUp && (
+             
               <div className="mb-4">
                 <label className="block mb-1">Email:</label>
                 <input
@@ -233,7 +313,7 @@ const LoginPage = () => {
                   className="w-full p-2 border border-gray-300 rounded"
                 />
               </div>
-            )}
+             
 
             <div className="mb-4">
               <label className="block mb-1">Password:</label>
@@ -245,19 +325,7 @@ const LoginPage = () => {
                 className="w-full p-2 border border-gray-300 rounded"
               />
             </div>
-
-            {/* {isSignUp && (
-              <div className="mb-4">
-                <label className="block mb-1">Confirm Password:</label>
-                <input
-                  type="password"
-                  name="confirmPassword"
-                  value={formData.confirmPassword}
-                  onChange={handleChange}
-                  className="w-full p-2 border border-gray-300 rounded"
-                />
-              </div>
-            )} */}
+ 
 
             <button
               type="submit"

@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import axios from 'axios';
-import Cookies from 'js-cookie';
+import Cookies from 'js-cookie'; 
+import nicaccount from '../Assets/account-svgrepo-com.svg'
+
 
 const Home = () => {
     const [files, setFiles] = useState({
@@ -63,56 +65,69 @@ const Home = () => {
     
       return (
         
-        <div className=' min-h-screen '>
-            <div className="file-upload-form shadow-2xl p-10 rounded-2xl">
-          <h2>Upload 4 Files</h2>
-          <form onSubmit={handleSubmit}>
-            <div className="mb-4">
-              <label className="block mb-1">File 1:</label>
-              <input
-                type="file"
-                name="file1"
-                onChange={handleFileChange}
-                className="w-full p-2 border border-gray-300 rounded"
-              />
+        <div className=' min-h-screen m-5' data-aos="fade-down" data-aos-duration="800">
+          <div className="file-upload-form shadow-2xl p-10 rounded-2xl bg-slate-200">
+           <h2 className='font-semibold text-2xl flex items-center justify-center py-10'>Nic Validatio File Upload</h2>
+
+          <div className='flex flex-col md:flex-row'>
+
+            <div className='w-full md:w-1/3 flex justify-center items-center ' 
+            data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-duration="1000">
+              <img  src={nicaccount} alt="nicaccount" className="h-[200px] w-auto rounded-full mr-2" />
             </div>
-            <div className="mb-4">
-              <label className="block mb-1">File 2:</label>
-              <input
-                type="file"
-                name="file2"
-                onChange={handleFileChange}
-                className="w-full p-2 border border-gray-300 rounded"
-              />
+
+            <div className='w-full md:w-2/3'  data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-duration="1000">
+              <form onSubmit={handleSubmit}>
+              <div className="mb-4">
+                <label className="block mb-1">File 1:</label>
+                <input
+                  type="file"
+                  name="file1"
+                  onChange={handleFileChange}
+                  className="w-full p-2 border border-gray-300 rounded"
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block mb-1">File 2:</label>
+                <input
+                  type="file"
+                  name="file2"
+                  onChange={handleFileChange}
+                  className="w-full p-2 border border-gray-300 rounded"
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block mb-1">File 3:</label>
+                <input
+                  type="file"
+                  name="file3"
+                  onChange={handleFileChange}
+                  className="w-full p-2 border border-gray-300 rounded"
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block mb-1">File 4:</label>
+                <input
+                  type="file"
+                  name="file4"
+                  onChange={handleFileChange}
+                  className="w-full p-2 border border-gray-300 rounded"
+                />
+              </div>
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-[150px] p-2 bg-blue-500 text-white rounded"
+              >
+                {loading ? 'Uploading...' : 'Upload Files'}
+              </button>
+              {successMessage && <p className="text-green-500 mt-4">{successMessage}</p>}
+              {error && <p className="text-red-500 mt-4">{error}</p>}
+            </form>
             </div>
-            <div className="mb-4">
-              <label className="block mb-1">File 3:</label>
-              <input
-                type="file"
-                name="file3"
-                onChange={handleFileChange}
-                className="w-full p-2 border border-gray-300 rounded"
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block mb-1">File 4:</label>
-              <input
-                type="file"
-                name="file4"
-                onChange={handleFileChange}
-                className="w-full p-2 border border-gray-300 rounded"
-              />
-            </div>
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full p-2 bg-blue-500 text-white rounded"
-            >
-              {loading ? 'Uploading...' : 'Upload Files'}
-            </button>
-            {successMessage && <p className="text-green-500 mt-4">{successMessage}</p>}
-            {error && <p className="text-red-500 mt-4">{error}</p>}
-          </form>
+
+          </div>
+          
         </div>
         </div>
         

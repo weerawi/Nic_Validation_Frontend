@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import AllData from '../Assets/AllData';
 
 const NicForm = () => {
     const [nics, setNics] = useState([]);
@@ -23,31 +24,34 @@ const NicForm = () => {
     }, []);
 
     return (
-        <div className='min-h-screen'>
-            <h2 className="text-2xl font-bold mb-4">NIC Details</h2>
-            <table className="min-w-full border-collapse border border-gray-300">
-                <thead>
-                    <tr>
-                        <th className="border border-gray-300 px-4 py-2">ID</th>
-                        <th className="border border-gray-300 px-4 py-2">NIC</th>
-                        <th className="border border-gray-300 px-4 py-2">Birthday</th>
-                        <th className="border border-gray-300 px-4 py-2">Age</th>
-                        <th className="border border-gray-300 px-4 py-2">Gender</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {nics.map(nic => (
-                        <tr key={nic.id}>
-                            <td className="border border-gray-300 px-4 py-2">{nic.id}</td>
-                            <td className="border border-gray-300 px-4 py-2">{nic.nic}</td>
-                            <td className="border border-gray-300 px-4 py-2">{nic.birthday}</td>
-                            <td className="border border-gray-300 px-4 py-2">{nic.age}</td>
-                            <td className="border border-gray-300 px-4 py-2">{nic.gender}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+   
+        <div className="flex flex-col items-center w-[80%] mx-auto mt-10 mb-28" data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-duration="1000">
+            <h1 className="text-3xl font-bold p-5">NIC Details</h1>
+            <div className="font-semibold items-center grid grid-cols-5 gap-1 md:gap-2 lg:gap-10 py-1 justify-around max-w-[1000px]">
+                <p className='flex justify-center'>Image</p>
+                <p className='flex justify-center'>Title</p>
+                <p className='flex justify-center'>Sub Title</p>
+                <p className='flex justify-center'>Date</p>
+                <p className='flex justify-center'>Album</p> 
+            </div>
+
+            <div className="my-5 py-5 bg-gray-50 overflow-y-scroll h-72">
+                {AllData.map((nic, i) => (
+                    <div key={i} className="max-w-[1000px] items-center border-b-2 grid grid-cols-5 gap-1 md:gap-2 lg:gap-10 py-1 border-gray-400">
+                        <>
+                                
+                                <p className='flex justify-center'>{nic.id}</p>
+                                <p className='flex justify-center'>{nic.nic}</p>
+                                <p className='flex justify-center'>{nic.birthday}</p>
+                                <p className='flex justify-center'>{nic.age}</p>
+                                <p className='flex justify-center'>{nic.gender}</p>
+                            
+                            </>
+                    </div>
+                ))}
+            </div>
         </div>
+ 
     );
 };
 

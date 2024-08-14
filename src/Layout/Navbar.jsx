@@ -6,7 +6,7 @@ import Cookies from 'js-cookie';
 
 const navData = [
     { name: 'home', path: '/home' },
-    { name: 'nicform', path: '/nicform' },
+    { name: 'Nic details', path: '/nicform' },
     { name: 'summary', path: '/summary' }, 
 ];
 
@@ -30,7 +30,7 @@ const Navbar = () => {
             {/* Logo */}
             <div className='flex items-center'>
                 <Link to="/home" className="flex items-center">
-                    <img src={Logo} alt="logo" className="h-14 w-14 rounded-full mr-2" />
+                    <img  src={Logo} alt="logo" className="h-14 w-14 rounded-full mr-2" />
                     <span className='font-bold tracking-widest uppercase text-xl'>NIC Validation</span>
                 </Link>
             </div>
