@@ -10,8 +10,7 @@ const LoginPage = () => {
   const [formData, setFormData] = useState({
     username: '',
     password: '',
-    email: '', // For sign-up form
-    confirmPassword: '', // For sign-up form
+    email: '', // For sign-up form 
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -35,14 +34,11 @@ const LoginPage = () => {
     try {
         if (isSignUp) {
             // Sign-up logic
-            const response = await axios.post(
-                'http://localhost:8080/signup',
-                {
-                    username: formData.username,
-                    email: formData.email,
-                    password: formData.password,
-                }
-            );
+            const response = await axios.post('http://localhost:8081/signup', {
+                username: formData.username,
+                email: formData.email,
+                password: formData.password,
+            });
 
             console.log('Sign-up successful!', response.data);
             toast.success('Sign-up successful!', {
@@ -56,28 +52,23 @@ const LoginPage = () => {
             });
 
             localStorage.setItem('user_id', response.data.user_id);
-            Cookies.set('access_token', response.data.token, { expires: 7 });
-
-             
         } else {
             // Login logic
-            const response = await axios.post(
-                'http://localhost:8080/signin',
-                {
-                    username: formData.username,
-                    password: formData.password,
-                }
-            );
+            const response = await axios.post('http://localhost:8081/signin', {
+                email: formData.email,
+                password: formData.password,
+            });
 
             console.log('Login successful!', response.data);
-            const { token } = response.data;
 
-            if (token) {
-                Cookies.set('access_token', token, { expires: 1 });
+            if (response.data) {
+                const { userId, token } = response.data;
+                localStorage.setItem('user_id', userId);
+                Cookies.set('access_token', token, { expires: 1 }); // Use cookies if needed
                 setIsSignedIn(true);
                 window.location.href = '/home';
             } else {
-                toast.error('Token not received', {
+                toast.error('Login failed. Please check your credentials.', {
                     position: "top-right",
                     autoClose: 2000,
                     hideProgressBar: false,
@@ -108,7 +99,6 @@ const LoginPage = () => {
         setLoading(false);
     }
 };
-
 
 
   
@@ -217,7 +207,7 @@ const LoginPage = () => {
 
     try {
       const response = await axios.post(
-        'http://localhost:8080/forgotpassword', // Update this URL with your actual endpoint
+        'http://localhost:8081/forgotpassword', // Update this URL with your actual endpoint
         {
           email: formData.email,
         }
