@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { FcBusinessman, FcBusinesswoman } from "react-icons/fc";
-import { PieChart } from 'react-minimal-pie-chart';
-import nicaccount from '../Assets/account-summary.svg';
-
+import { FcBusinessman, FcBusinesswoman } from "react-icons/fc"; 
+import nicaccount from '../Assets/account-summary.svg' ; 
+import { BarChart, PieChart } from '@mui/x-charts';
 
 const Summary = () => {
   const [summary, setSummary] = useState({
@@ -53,7 +52,7 @@ const Summary = () => {
       <h2 className='font-semibold text-4xl tracking-widest flex items-center justify-center pb-32' data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-duration="1000">NIC Validation Summary</h2>
  
 
-      <div className='p-4 flex items-center justify-center  mb-20 md:mx-20 py-10 rounded-3xl shadow-2xl sm:w-[250px] md:w-[400px] bg-black text-white' data-aos="fade-down" data-aos-anchor-placement="top-bottom" data-aos-duration="1000">
+      <div className='h-[40vh] p-4 flex items-center justify-center  mb-20 md:mx-20 py-10 rounded-3xl shadow-2xl sm:w-[250px] md:w-[400px] bg-black text-white' data-aos="fade-down" data-aos-anchor-placement="top-bottom" data-aos-duration="1000">
         <div>
           <img src={nicaccount} alt="nicaccount" className="h-[100px] md:h-[150px] w-auto rounded-full mr-2 " />
         </div>
@@ -73,23 +72,30 @@ const Summary = () => {
       </div>
 
 
-      <div className='flex flex-col md:flex-row mb-20 items-center justify-center'>
+      <div className='h-[80vh] flex flex-col md:flex-row mb-20 items-center justify-center'>
   
         <div className='max-w-[500px] w-auto sm:w-[300px] md:w-[400px]' data-aos="fade-right" data-aos-anchor-placement="top-bottom" data-aos-duration="1000">
-          <PieChart
-            data={[
-              { title: 'Male', value: summary.maleUsers, color: '#5B99C2' },
-              { title: 'Female', value: summary.femaleUsers, color: '#FF4E88' },
-            ]}
-          />
+           
+        <BarChart
+      xAxis={[{ scaleType: 'band', data: ['group A', 'group B', 'group C'] }]}
+      series={[{ data: [4, 3, 5] }, { data: [1, 6, 3] }, { data: [2, 5, 6] }]}
+      width={500}
+      height={300}
+    />
         </div>
   
         <div className='max-w-[500px] w-auto sm:w-[300px] md:w-[400px]' data-aos="fade-left" data-aos-anchor-placement="top-bottom" data-aos-duration="1000">
-          <PieChart
-            data={[
-              { title: 'Male', value: summary.maleUsers, color: '#5B99C2' },
-              { title: 'Female', value: summary.femaleUsers, color: '#FF4E88' },
+        <PieChart
+            series={[
+              {
+                data: [
+                  { id: 0, value: summary.maleUsers, label: 'Male' },
+                  { id: 1, value: summary.femaleUsers, label: 'Female' },
+                ],
+              },
             ]}
+            width={400}
+            height={200}
           />
         </div>
 

@@ -31,7 +31,7 @@ const Header = () => {
   
   >
       
-      <div className={`${ isFixed ? '   w-full lg:w-[80%] max-w-[1300px] mx-auto' : ' '}`}>
+      <div className={`${ isFixed ? '   w-full mx-auto   ' : ' '}`}>
 
    
 
@@ -46,7 +46,7 @@ const Header = () => {
               boxShadow: isFixed? " rgba(255,255,255, 0.55) 0px -4px 10px 0px inset":'',
           
       }}
-       className={`rounded-full  ${ isFixed ? 'my-2 py-9 px-5 mt-7 ' : ' '}`} 
+       className={`  rounded-bl-full rounded-br-full  ${ isFixed ? ' py-8 px-24 ' : ' '}`} 
        >
             <Navbar/>
         </div>

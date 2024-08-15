@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import Title from '../Components/Title';
 
 const NicForm = () => {
     const [nics, setNics] = useState([]);
@@ -27,8 +28,8 @@ const NicForm = () => {
     }, [page, size]);
 
     return (
-        <div className="flex flex-col items-center w-[80%] mx-auto mt-10 mb-10 min-h-screen ">
-            <h1 className="text-3xl font-bold p-5">NIC Details</h1>
+        <div className=" flex flex-col items-center w-[80%] mx-auto   mb-20 min-h-screen " data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-duration="1000"> 
+            <Title title="NIC Details"/>
             <div className="font-semibold items-center bg-black text-white grid grid-cols-5 gap-1 md:gap-2 lg:gap-10 py-1 justify-around lg:w-[900px] md:w-[800px] w-[600px] ">
                 <p className='flex justify-center'>Id</p>
                 <p className='flex justify-center'>NIC</p>

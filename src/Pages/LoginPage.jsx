@@ -240,7 +240,7 @@ const LoginPage = () => {
             />
 
     
-    <div className="flex flex-col items-center justify-center mx-auto mt-14 mb-20 py-4 min-h-[500px] max-w-[400px] bg-white rounded-3xl shadow-2xl">
+    <div className="flex flex-col items-center justify-center mx-auto  mb-24 py-4 min-h-[500px] max-w-[400px] bg-white rounded-3xl shadow-2xl">
       <img src={Logo} alt="Logo" className="h-28 mb-1" />
       <div className="w-80">
         <h2 className="text-3xl font-bold mb-4">

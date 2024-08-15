@@ -5,9 +5,9 @@ import { NicContext } from '../Context/NicContext';
 import Cookies from 'js-cookie';
 
 const navData = [
-    { name: 'home', path: '/home' },
+    { name: 'upload', path: '/home' },
     { name: 'Nic details', path: '/nicform' },
-    { name: 'summary', path: '/summary' }, 
+    { name: 'dashboard', path: '/summary' }, 
 ];
 
 const Navbar = () => {
@@ -26,7 +26,7 @@ const Navbar = () => {
     const {isFixed, isSignedIn} = useContext(NicContext);
 
     return (
-        <nav className={`flex ${ !isFixed ? 'bg-black  rounded-bl-full rounded-br-full   top-0 py-10 px-24' : '   '} items-center justify-between uppercase text-sm md:text-base lg:tracking-widest  text-white`}>
+        <nav className={`flex ${ !isFixed ? 'bg-black   top-0 py-8 px-24' : '   '} rounded-bl-full rounded-br-full   items-center justify-between uppercase text-sm md:text-base lg:tracking-widest  text-white`}>
             {/* Logo */}
             <div className='flex items-center'>
                 <Link to="/home" className="flex items-center">
@@ -36,7 +36,7 @@ const Navbar = () => {
             </div>
             
             {/* Main Navigation */}
-            <div className='flex space-x-4'>
+            <div className='flex space-x-4 items-center justify-center'>
                 {navData.map((link, index) => (
                     <Link
                         key={index}
@@ -46,15 +46,18 @@ const Navbar = () => {
                         {link.name}
                     </Link>
                 ))}
+
+
+                {/* Logout Button */}
+                    {isSignedIn && <button
+                        onClick={logout}
+                        className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"
+                    >
+                        Logout
+                    </button>}
             </div>
 
-             {/* Logout Button */}
-            {isSignedIn && <button
-                onClick={logout}
-                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"
-            >
-                Logout
-            </button>}
+             
         </nav>
     );
 }
