@@ -16,7 +16,7 @@ const Layout = (props) => {
     <Fragment>
         <Header />
         <div className="bg-white ">
-            <main className='px-5 py-3 w-full lg:w-[80%] max-w-[1300px] mx-auto pt-48 '>
+            <main className='px-5 py-3 w-full lg:w-[1300px] max-w-[1500px] mx-auto pt-24'>
             {props.children}
             </main>
         </div>

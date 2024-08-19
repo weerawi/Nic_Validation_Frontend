@@ -26,7 +26,7 @@ const Navbar = () => {
     const {isFixed, isSignedIn} = useContext(NicContext);
 
     return (
-        <nav className={`flex ${ !isFixed ? 'bg-black   top-0 py-8 px-24' : '   '} rounded-bl-full rounded-br-full   items-center justify-between uppercase text-sm md:text-base lg:tracking-widest  text-white`}>
+        <nav className={`flex ${ !isFixed ? 'bg-black   top-0 py-5 px-24' : '   '} rounded-bl-full rounded-br-full   items-center justify-between uppercase text-sm md:text-base lg:tracking-widest  text-white`}>
             {/* Logo */}
             <div className='flex items-center'>
                 <Link to="/home" className="flex items-center">
