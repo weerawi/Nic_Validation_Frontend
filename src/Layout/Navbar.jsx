@@ -4,11 +4,16 @@ import Logo from '../Assets/mobios_logo.jpg'; // Ensure this path is correct
 import { NicContext } from '../Context/NicContext';
 import Cookies from 'js-cookie';
 
+
+
+
 const navData = [
     { name: 'upload', path: '/home' },
     { name: 'Nic details', path: '/nicform' },
     { name: 'dashboard', path: '/summary' }, 
 ];
+
+
 
 const Navbar = () => {
     const logout = () => {
