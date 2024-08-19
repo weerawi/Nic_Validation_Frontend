@@ -508,23 +508,23 @@ const NicForm = () => {
 
     const displayedNics = filteredNics.slice(page * size, page * size + size);
 
-
-
+ 
     const downloadReport = async (type) => {
         try {
-            const filters = {
-                gender: genderFilter,
-                minAge: minAgeFilter,
-                maxAge: maxAgeFilter,
-                filename: filenameFilter,
-                nicSearch: nicSearch,
-            };
-
+            const filters = {};
+    
+            // Only add filters if they are not empty
+            if (genderFilter) filters.gender = genderFilter;
+            if (minAgeFilter) filters.minAge = minAgeFilter;
+            if (maxAgeFilter) filters.maxAge = maxAgeFilter;
+            if (filenameFilter) filters.filename = filenameFilter;
+            if (nicSearch) filters.nicSearch = nicSearch;
+    
             const response = await axios.get(`http://localhost:8080/api/download/${type}`, {
                 params: filters,
                 responseType: 'blob',
             });
-
+    
             const url = window.URL.createObjectURL(new Blob([response.data]));
             const link = document.createElement('a');
             const fileExtension = type === 'excel' ? 'xlsx' : type;
@@ -532,11 +532,11 @@ const NicForm = () => {
             link.setAttribute('download', `nic_records.${fileExtension}`);
             document.body.appendChild(link);
             link.click();
-             
         } catch (error) {
             console.error("Error downloading report:", error);
         }
     };
+    
 
 
 
@@ -559,7 +559,7 @@ const NicForm = () => {
                             placeholder="Search by NIC Number"
                             value={nicSearch}
                             onChange={(e) => setNicSearch(e.target.value)}
-                            className="px-2 py-1 border border-gray-300 rounded ml-2 w-40 w-40"
+                            className="px-2 py-1 border border-gray-300 rounded ml-2 w-40 "
                         />
 
                         {/* Gender Filter */}
