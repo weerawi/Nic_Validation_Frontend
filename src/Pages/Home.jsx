@@ -98,42 +98,51 @@ const Home = () => {
                     
 
                     <div
-                        className='w-full  backdrop-blur-sm bg-[rgba(0,0,0,0.4)] p-16 rounded-2xl
-                         shadow-inner shadow-gray-500'
+                        className='w-full flex   backdrop-blur-sm bg-[rgba(0,0,0,0.5)] p-16 rounded-2xl
+                         shadow-inner shadow-gray-500 justify-center'
                          
                         onDrop={handleDrop}
                         onDragOver={handleDragOver}
                     >
-                        <form onSubmit={handleSubmit}>
-                            <div className="mb-4 flex flex-row items-center justify-between gap-10">
+                        <form onSubmit={handleSubmit} className='items-center   flex flex-col md:flex-row'>
+                            <div className="mb-4 flex flex-col items-center justify-between gap-10">
                                 {/* Drag and Drop Icon */}
                                 <input
                                     type="file"
                                     multiple
                                     onChange={handleFileChange}
-                                    className="w-2/5 p-2 border border-gray-300 rounded"
+                                    className="w-4/5 p-2 border border-gray-300 rounded"
                                 />
-                                <div className='bg-[rgba(255,255,255,0.6)] flex flex-col rounded-md w-3/5 items-center justify-center'>
-                                    <SubTitle title="Drag and drop files here"/>
+                                <div className=' flex flex-col rounded-md w-3/5 items-center justify-center'>
+                                    {/* <SubTitle title="Drag and drop files here"/>
 
-                                    <AiOutlineCloudUpload className="text-8xl text-gray-500 mb-4  backdrop-blur-sm " />
+                                    <AiOutlineCloudUpload className="text-8xl text-gray-500 mb-4  backdrop-blur-sm " /> */}
+                                    <div className="mb-4">
+                                        <p>Uploaded Files:</p>
+                                        <ul>
+                                            {files.map((file, index) => (
+                                                <li key={index}>{file.name}</li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                    <button
+                                        type="submit"
+                                        disabled={loading}
+                                        className="w-[150px] p-2 bg-blue-500 text-white rounded"
+                                    >
+                                        {loading ? 'Uploading...' : 'Upload Files'}
+                                    </button>
+                                
                                 </div>
                             </div>
-                            <div className="mb-4">
-                                <p>Uploaded Files:</p>
-                                <ul>
-                                    {files.map((file, index) => (
-                                        <li key={index}>{file.name}</li>
-                                    ))}
-                                </ul>
+
+                            <div className='flex flex-col p-5 items-center rounded-2xl bg-[rgba(255,255,255,0.6)]'>
+                                <SubTitle title="Drag and drop files here"/>
+
+                                <AiOutlineCloudUpload className="text-8xl text-gray-500 mb-4  backdrop-blur-sm " />
+                                    
                             </div>
-                            <button
-                                type="submit"
-                                disabled={loading}
-                                className="w-[150px] p-2 bg-blue-500 text-white rounded"
-                            >
-                                {loading ? 'Uploading...' : 'Upload Files'}
-                            </button>
+                                        
                         </form>
                     </div>
                 </div>
