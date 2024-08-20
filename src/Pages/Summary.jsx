@@ -70,7 +70,7 @@ const Summary = () => {
 
         <DataCard
           bgColor='bg-red-600'
-          hoverColor='bg-pink-900'
+          hoverColor='bg-red-900'
           text='Total Valid Records'
           totalRecords={summary.totalValidRecords}
           Icon={RiPassValidFill}
