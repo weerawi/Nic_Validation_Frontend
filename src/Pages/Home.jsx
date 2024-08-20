@@ -85,7 +85,7 @@ const Home = () => {
     return (
         <div className='m-5 mt-10 mb-20 flex flex-col items-center' data-aos="fade-down" data-aos-duration="800">
             
-            <div className="file-upload-form shadow-inner shadow-gray-500 p-10 rounded-2xl w-[800px] py-16 bg-gradient-to-r from-green-300 via-yellow-300 to-sky-200 ">
+            <div className="file-upload-form shadow-xl shadow-gray-500 p-10 rounded-2xl w-[800px] py-16 bg-gradient-to-r from-green-300 via-yellow-300 to-sky-200 ">
                 <Title title="NIC Validation File Upload"/>
 
                 <div className='flex flex-col md:flex-row  rounded-2xl h-auto text-white ' 
@@ -98,8 +98,8 @@ const Home = () => {
                     
 
                     <div
-                        className='w-full flex   backdrop-blur-sm bg-[rgba(0,0,0,0.5)] p-16 rounded-2xl
-                         shadow-inner shadow-gray-500 justify-center'
+                        className='w-full flex   backdrop-blur-sm bg-[rgba(0,0,0,0.5)] p-16 pb-20 rounded-2xl
+                         shadow-lg shadow-gray-500 justify-center'
                          
                         onDrop={handleDrop}
                         onDragOver={handleDragOver}

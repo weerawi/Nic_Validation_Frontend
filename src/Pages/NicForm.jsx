@@ -131,7 +131,7 @@ const NicForm = () => {
                         {/* NIC Search */}
                         <input
                             type="text"
-                            placeholder="Search by NIC Number"
+                            placeholder="Search by NIC "
                             value={nicSearch}
                             onChange={(e) => setNicSearch(e.target.value)}
                             className="px-2 py-1 border border-gray-300 rounded ml-2 w-40 "
@@ -239,7 +239,7 @@ const NicForm = () => {
                 <div className='flex flex-col  items-center'  data-aos="fade-down" data-aos-anchor-placement="top-bottom" data-aos-duration="1000">
                      
                     {/* NIC Details Table */}
-                    <div className="font-semibold items-center py-3 bg-black text-white grid grid-cols-6 gap-1 md:gap-2 lg:gap-10 justify-around lg:w-[900px] md:w-[800px] w-[600px]">
+                    <div className="font-semibold items-center py-3 rounded-xl bg-black text-white grid grid-cols-6 gap-1 md:gap-2 lg:gap-10 justify-around lg:w-[900px] md:w-[800px] w-[600px]">
                         <p className='flex justify-center'>Id</p>
                         <p className='flex justify-center'>NIC</p>
                         <p className='flex justify-center'>Birthday</p>
@@ -248,7 +248,7 @@ const NicForm = () => {
                         <p className='flex justify-center'>FileName</p>
                     </div>
             
-                    <div className="my-5 py-5 overflow-y-scroll h-auto bg-gray-100 p-5">
+                    <div className="my-5 py-5 overflow-y-scroll h-auto bg-gray-100 p-5 rounded-2xl">
                         {displayedNics.map((nic, i) => (
                             <div key={i} className="lg:w-[900px] md:w-[800px] w-[600px] items-center border-b-2 grid grid-cols-6 gap-1 md:gap-2 lg:gap-10 py-2 border-gray-400">
                                 <p className='flex justify-center'>{i + 1 + (page * size)}</p>
@@ -262,7 +262,7 @@ const NicForm = () => {
                     </div>
             
                     {/* Pagination */}
-                    <div className="flex justify-between w-[600px]">
+                    <div className="flex justify-between w-[600px] absolute bottom-[-30px]">
                         <button
                             onClick={() => setPage(prev => Math.max(prev - 1, 0))}
                             disabled={page === 0}
