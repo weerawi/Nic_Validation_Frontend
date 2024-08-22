@@ -151,16 +151,7 @@ const Summary = () => {
         </div>
 
       </div>
-
-      
-
-      
-
-
-
-     
-
-      
+  
     </div>
   );
 };
